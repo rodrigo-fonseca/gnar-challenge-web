@@ -21,7 +21,8 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "cz"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +40,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.4"
+    "@types/styled-components": "^5.1.4",
+    "commitizen": "^4.2.1"
   }
 }
