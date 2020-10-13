@@ -4,6 +4,7 @@ import UploadsResourceService from 'services/UploadsResourceService'
 import UploadComponent from 'components/UploadComponent'
 import { UploadI } from 'interfaces/upload'
 import { Container, Row, Col } from 'react-bootstrap'
+import LoadingComponent from 'components/LoadingComponent'
 
 const Wrapper = styled(Container)`
   padding-top: 10px;
@@ -17,6 +18,7 @@ const UploadCol = styled(Col)`
 
 const ListUploadsComponent = () => {
   const [uploads, setUploads] = useState<Array<UploadI>>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(get, [])
 
@@ -24,6 +26,7 @@ const ListUploadsComponent = () => {
     const uploadsResourceService = new UploadsResourceService()
     uploadsResourceService.get().then((response: { data: Array<UploadI> }) => {
       setUploads(response.data)
+      setLoading(false)
     })
   }
 
@@ -36,11 +39,15 @@ const ListUploadsComponent = () => {
   }
 
   return (
-    <Wrapper fluid>
-      <UploadRow md={2} xs={1} sm={1} lg={4}>
-        {renderUploads()}
-      </UploadRow>
-    </Wrapper>
+    <>
+      <LoadingComponent loading={loading} />
+
+      <Wrapper fluid>
+        <UploadRow md={2} xs={1} sm={1} lg={4}>
+          {renderUploads()}
+        </UploadRow>
+      </Wrapper>
+    </>
   )
 }
 

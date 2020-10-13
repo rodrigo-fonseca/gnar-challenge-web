@@ -4,10 +4,12 @@ import UploadsResourceService from 'services/UploadsResourceService'
 import { UploadI } from 'interfaces/upload'
 import { useParams } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
+import LoadingComponent from 'components/LoadingComponent'
 
 const UploadDetailPage = () => {
   const params: { id: string } = useParams()
   const [upload, setUpload] = useState<UploadI | undefined>()
+  const [loading, setLoading] = useState(true)
 
   useEffect(get, [])
 
@@ -17,17 +19,22 @@ const UploadDetailPage = () => {
 
     uploadsResourceService.get(id).then((response: { data: UploadI }) => {
       setUpload(response.data)
+      setLoading(false)
     })
   }
 
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <UploadDetailComponent upload={upload} />
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <LoadingComponent loading={loading} />
+
+      <Container fluid>
+        <Row>
+          <Col>
+            <UploadDetailComponent upload={upload} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   )
 }
 
