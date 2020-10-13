@@ -2,6 +2,7 @@ import React from 'react'
 import { UploadI } from 'interfaces/upload'
 import styled from 'styled-components'
 import { Card, Button } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
 
 const Wrapper = styled.div``
 
@@ -10,16 +11,22 @@ interface PropsI {
 }
 
 const UploadComponent = ({ upload }: PropsI) => {
+  const history = useHistory()
+
+  function view() {
+    history.push(`/uploads/${upload.id}`)
+  }
+
   return (
     <Wrapper>
       <Card>
         <Card.Body>
           <Card.Title>YardCode: {upload.yardCode}</Card.Title>
-          <Card.Text>
-            <p>EmployeeCode: {upload.employeeCode}</p>
-          </Card.Text>
+          <Card.Text>EmployeeCode: {upload.employeeCode}</Card.Text>
 
-          <Button variant="info">Visualizar</Button>
+          <Button variant="info" onClick={view}>
+            Visualizar
+          </Button>
         </Card.Body>
       </Card>
     </Wrapper>
