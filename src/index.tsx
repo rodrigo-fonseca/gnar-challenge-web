@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import UploadsPage from 'pages/UploadsPage'
+import UploadDetailPage from 'pages/UploadDetailPage'
 import * as serviceWorker from './serviceWorker'
 import styled from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
@@ -17,8 +18,12 @@ ReactDOM.render(
             <Redirect to="/uploads" />
           </Route>
 
-          <Route path="/uploads">
+          <Route exact path="/uploads">
             <UploadsPage />
+          </Route>
+
+          <Route path="/uploads/:id">
+            <UploadDetailPage />
           </Route>
         </Switch>
       </BrowserRouter>
