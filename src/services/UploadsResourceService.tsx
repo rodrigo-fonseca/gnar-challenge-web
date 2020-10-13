@@ -1,6 +1,6 @@
 import RequestCoreService from 'services/core/RequestCoreService'
 
-class FileResourceService {
+class UploadsResourceService {
   private resource = 'uploads/'
   private request: RequestCoreService
 
@@ -13,4 +13,4 @@ class FileResourceService {
   }
 }
 
-export default FileResourceService
+export default UploadsResourceService
