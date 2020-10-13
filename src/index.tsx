@@ -4,6 +4,7 @@ import UploadsPage from 'pages/UploadsPage'
 import * as serviceWorker from './serviceWorker'
 import styled from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const AppWrapper = styled.div``
 
