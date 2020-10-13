@@ -1,11 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HomePage from 'pages/home/HomePage'
+import UploadsPage from 'pages/UploadsPage'
 import * as serviceWorker from './serviceWorker'
+import styled from 'styled-components'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+
+const AppWrapper = styled.div``
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomePage />
+    <AppWrapper>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/uploads" />
+          </Route>
+
+          <Route path="/uploads">
+            <UploadsPage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </AppWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 )
