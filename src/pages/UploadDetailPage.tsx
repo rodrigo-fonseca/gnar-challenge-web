@@ -3,7 +3,7 @@ import UploadDetailComponent from 'components/UploadDetailComponent'
 import UploadsResourceService from 'services/UploadsResourceService'
 import { UploadI } from 'interfaces/upload'
 import { useParams } from 'react-router-dom'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const UploadDetailPage = () => {
   const params: { id: string } = useParams()
