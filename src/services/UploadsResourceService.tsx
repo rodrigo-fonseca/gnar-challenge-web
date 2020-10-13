@@ -12,7 +12,7 @@ class UploadsResourceService {
     return this.request.post(this.resource, file)
   }
 
-  get(id: number): Promise<any> {
+  get(id?: number): Promise<any> {
     let resource = this.resource
     if (id) resource += `${id}`
 
