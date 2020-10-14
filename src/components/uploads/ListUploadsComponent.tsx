@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import UploadComponent from 'components/UploadComponent'
+import UploadComponent from 'components/uploads/UploadComponent'
 import { UploadI } from 'interfaces/upload'
 import { Container, Row, Col } from 'react-bootstrap'
 

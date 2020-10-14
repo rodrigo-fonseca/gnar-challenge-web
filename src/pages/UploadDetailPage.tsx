@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import UploadDetailComponent from 'components/UploadDetailComponent'
+import UploadDetailComponent from 'components/uploads/UploadDetailComponent'
 import UploadsResourceService from 'services/UploadsResourceService'
 import { UploadI } from 'interfaces/upload'
 import { useParams } from 'react-router-dom'

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import ListUploadsComponent from 'components/ListUploadsComponent'
+import ListUploadsComponent from 'components/uploads/ListUploadsComponent'
 import UploadsResourceService from 'services/UploadsResourceService'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import LoadingComponent from 'components/LoadingComponent'
@@ -16,8 +16,8 @@ const FormWrapper = styled(Container)`
 `
 
 function UploadsPage() {
+  const [file, setFile] = useState<File>()
   const [uploads, setUploads] = useState<Array<UploadI>>([])
-  const [formData, setFormData] = useState<FormData | undefined>()
   const [fileName, setFileName] = useState('')
   const [loading, setLoading] = useState(true)
 
@@ -42,7 +42,7 @@ function UploadsPage() {
     if (!event.target.files) return
     if (!event.target.files[0]) return
 
-    handleFormData(event.target.files[0])
+    setFile(event.target.files[0])
   }
 
   function onFileName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -52,32 +52,41 @@ function UploadsPage() {
     setFileName(event.target.value)
   }
 
-  function handleFormData(file: File) {
-    const formData = new FormData()
-    formData.append('file', file)
-
-    setFormData(formData)
-  }
-
   function submit(e: React.FormEvent<HTMLElement>) {
     e.preventDefault()
 
     if (!fileName) return alert('What is the filename?')
+    if (!file) return alert('Please add your file')
 
     setLoading(true)
+    const formData = getFormData(file, fileName)
 
     const uploadsResourceService = new UploadsResourceService()
     uploadsResourceService
       .create(formData)
-      .then(res => {
-        setUploads([...uploads, ...res.data])
-        setFileName('')
-        setFormData(undefined)
-      })
-      .catch(() => {
-        alert('Ops, something goes wrong :(')
-      })
-      .finally(() => setLoading(false))
+      .then(onSubmitResponse)
+      .catch(onSubmitError)
+      .finally(onSubmitFinished)
+  }
+
+  function onSubmitResponse(res: { data: Array<UploadI> }) {
+    setUploads([...uploads, ...res.data])
+    setFileName('')
+  }
+
+  function onSubmitError() {
+    alert('Ops, something goes wrong :(')
+  }
+
+  function onSubmitFinished() {
+    setLoading(false)
+  }
+
+  function getFormData(file: File, filename: string): FormData {
+    const formData = new FormData()
+    formData.append('file', file, filename)
+
+    return formData
   }
 
   return (
@@ -100,6 +109,7 @@ function UploadsPage() {
                   <Form.File
                     id="exampleFormControlFile1"
                     name="file"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     onChange={onFileUpload}
                   />
                 </Col>
