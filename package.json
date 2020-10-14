@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "dev": "cp .env.development .env && env-cmd react-scripts start",
     "prod": "cp .env.production .env && env-cmd react-scripts start",
-    "build": "react-scripts build",
+    "build:prod": "cp .env.production .env && env-cmd react-scripts build",
+    "build": "cp .env.development .env && env-cmd react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "commit": "cz"
