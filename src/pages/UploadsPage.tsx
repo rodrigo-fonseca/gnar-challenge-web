@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import ListUploadsComponent from 'components/uploads/ListUploadsComponent'
 import UploadsResourceService from 'services/UploadsResourceService'
@@ -20,6 +20,7 @@ function UploadsPage() {
   const [uploads, setUploads] = useState<Array<UploadI>>([])
   const [fileName, setFileName] = useState('')
   const [loading, setLoading] = useState(true)
+  const formRef = useRef(null)
 
   useEffect(getUploads, [])
 
@@ -71,7 +72,10 @@ function UploadsPage() {
 
   function onSubmitResponse(res: { data: Array<UploadI> }) {
     setUploads([...uploads, ...res.data])
+
     setFileName('')
+    setFile(undefined)
+    resetForm()
   }
 
   function onSubmitError() {
@@ -89,6 +93,14 @@ function UploadsPage() {
     return formData
   }
 
+  function resetForm() {
+    if (!formRef) return
+    if (!formRef.current) return
+
+    const ref: any = formRef.current
+    ref && ref.reset()
+  }
+
   return (
     <>
       <LoadingComponent loading={loading} />
@@ -96,7 +108,7 @@ function UploadsPage() {
       <FormWrapper fluid>
         <Row>
           <Col>
-            <Form onSubmit={submit} noValidate>
+            <Form ref={formRef} onSubmit={submit} noValidate>
               <Form.Row>
                 <Col>
                   <Form.Control
