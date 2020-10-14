@@ -101,6 +101,7 @@ function UploadsPage() {
                 <Col>
                   <Form.Control
                     type="text"
+                    value={fileName}
                     placeholder="Nome do arquivo..."
                     onChange={onFileName}
                   />
