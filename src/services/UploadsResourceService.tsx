@@ -8,7 +8,7 @@ class UploadsResourceService {
     this.request = new RequestCoreService()
   }
 
-  create(file: any): Promise<any> {
+  create(file: FormData): Promise<any> {
     return this.request.post(this.resource, file)
   }
 
