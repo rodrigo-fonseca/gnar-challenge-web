@@ -22,7 +22,9 @@ const UploadDetailComponent = ({ upload }: PropsI) => {
       {upload && (
         <Card>
           <Card.Body>
-            <Card.Title>YardCode: {upload.yardCode}</Card.Title>
+            <Card.Title>FileName: {upload.filename}</Card.Title>
+
+            <Card.Text>YardCode: {upload.yardCode}</Card.Text>
             <Card.Text>EmployeeCode: {upload.employeeCode}</Card.Text>
             <Card.Text>Clock In: {formatDate(upload.clockIn)}</Card.Text>
             <Card.Text>Clock Out: {formatDate(upload.clockOut)}</Card.Text>
